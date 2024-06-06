@@ -20,7 +20,7 @@ const router = createBrowserRouter([
 
 export const queryClient = new QueryClient()
 const App = () => {
-    const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+    const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
   if (isLoading) {
     return <div>Loading ...</div>;
