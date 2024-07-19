@@ -5,7 +5,6 @@ import HomeScreen from "./screens/Home.tsx";
 import {QueryClient, QueryClientProvider} from "react-query";
 import RulesScreen from "./screens/Rules.tsx";
 import { useAuth0 } from '@auth0/auth0-react';
-import { AUTH0_USERNAME } from './utils/constants.ts';
 
 
 const router = createBrowserRouter([
