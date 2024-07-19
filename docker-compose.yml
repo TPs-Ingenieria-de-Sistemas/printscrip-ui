@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  printscript-ui:
+    container_name: "printscript-ui"
+    build:
+      context: .
+    expose:
+      - "80"
+    environment:
+      - VITE_FRONTEND_URL=${VITE_FRONTEND_URL}
+      - VITE_BACKEND_URL=${VITE_BACKEND_URL}
+      - VITE_AUTH0_USERNAME=${VITE_AUTH0_USERNAME}
+      - VITE_AUTH0_PASSWORD=${VITE_AUTH0_PASSWORD}
+    ports:
+      - "5173:80"
+    env_file:
+      - .env
