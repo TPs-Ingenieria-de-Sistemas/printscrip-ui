@@ -39,7 +39,5 @@ jobs:
           key: ${{ secrets.SSH_DEV_PRIVATE_KEY }}
           script: |
             cd infra
-            eval "$(direnv hook bash)"
-            direnv allow
             sudo docker compose pull ${{ env.PROJECT_NAME }}
             sudo -E docker compose up -d ${{ env.PROJECT_NAME }}
