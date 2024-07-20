@@ -40,5 +40,6 @@ jobs:
           script: |
             cd infra
             direnv allow
+            eval "$(direnv hook bash)"
             sudo docker compose pull ${{ env.PROJECT_NAME }}
             sudo -E docker compose up -d ${{ env.PROJECT_NAME }}
