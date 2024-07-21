@@ -29,6 +29,9 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
+          env:
+            VITE_AUTH0_USERNAME=${{ secrets.AUTH0_DOMAIN }}
+            VITE_AUTH0_PASSWORD=${{ secrets.AUTH0_CLIENT }}
           build-args:
             VITE_AUTH0_USERNAME=${{ secrets.AUTH0_DOMAIN }}
             VITE_AUTH0_PASSWORD=${{ secrets.AUTH0_CLIENT }}
