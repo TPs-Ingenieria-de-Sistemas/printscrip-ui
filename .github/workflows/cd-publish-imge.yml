@@ -32,7 +32,6 @@ jobs:
           build-args:
             VITE_AUTH0_USERNAME=${{ secrets.AUTH0_DOMAIN }}
             VITE_AUTH0_PASSWORD=${{ secrets.AUTH0_CLIENT }}
-          platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:${{ env.VERSION }}
             ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:latest
