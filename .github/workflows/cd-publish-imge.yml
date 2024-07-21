@@ -26,7 +26,7 @@ jobs:
 
       - name: build and push image
         run: |
-          docker build . --build-arg="VITE_AUTH0_USERNAME=${{ secrets.AUTH0_DOMAIN }}" --build-arg="VITE_AUTH0_PASSWORD=${{ secrets.AUTH0_CLIENT }}" --tag ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:${{ env.VERSION }} --tag ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:latest
+          docker build . --build-arg VITE_AUTH0_USERNAME=${{ secrets.AUTH0_DOMAIN }} --build-arg VITE_AUTH0_PASSWORD=${{ secrets.AUTH0_CLIENT }} --tag ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:${{ env.VERSION }} --tag ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:latest
           docker push ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:${{ env.VERSION }}
           docker push ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:latest
 
