@@ -34,8 +34,8 @@ jobs:
             VITE_AUTH0_PASSWORD=${{ secrets.AUTH0_CLIENT }}
           platforms: linux/amd64,linux/arm64
           tags: |
-            --tag ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:${{ env.VERSION }}
-            --tag ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:latest
+            ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:${{ env.VERSION }}
+            ghcr.io/tps-ingenieria-de-sistemas/${{ env.PROJECT_NAME }}:latest
 
       - name: connect-and-run
         uses: appleboy/ssh-action@master
