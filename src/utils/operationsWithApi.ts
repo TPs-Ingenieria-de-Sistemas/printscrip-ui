@@ -70,7 +70,19 @@ export class OperationsWithAPI implements SnippetOperations {
     }
 
     shareSnippet(snippetId: string, userId: string): Promise<Snippet> {
-        return this.fake.shareSnippet(snippetId)
+        //TODO: add TOKEN BEARER
+        return new Promise(resolve => {
+            setTimeout(async () => {
+                const spitedId = snippetId.split("/") 
+                const fileName = spitedId.at(spitedId.length-1)
+                const response = await axios({
+                    method: 'POST',
+                    url: `${BACKEND_URL}/snippets/share/${fileName}`,
+                    data: {userId: userId, permissions: 4}
+                })
+                resolve(response.data)
+            })
+        })
     }
 
     getFormatRules(): Promise<Rule[]> {
