@@ -138,7 +138,16 @@ export class OperationsWithAPI implements SnippetOperations {
     }
 
     deleteSnippet(id: string): Promise<string> {
-        return this.fake.deleteSnippet(id);
+        //TODO: add TOKEN BEARER
+        return new Promise(resolve => {
+            setTimeout(async () => {
+                const response = await axios({
+                    method: 'DELETE',
+                    url: `${BACKEND_URL}/snippets/${id}`
+                })
+                resolve(response.data)
+            }, DELAY)
+        })
     }
 
     //??? WE ONLY GET TEST-ID and should be enought, but we ask for more in the API
