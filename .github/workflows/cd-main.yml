@@ -1,0 +1,29 @@
+name: UPDATE PROD SERVER WITH IMAGES
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  connect-and-update-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract name proyect vesrion and name 
+        run: |
+          PROJECT_NAME=$(jq -r '.name' package.json)
+          echo $PROJECT_NAME
+          echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
+          
+      - name: connect-and-run
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_URL }}
+          username: ${{ secrets.PROD_USERNAME }}
+          key: ${{ secrets.SSH_PROD_PRIVATE_KEY }}
+          script: |
+            cd infra
+            sudo docker compose pull ${{ env.PROJECT_NAME }}
+            sudo -E docker compose up -d ${{ env.PROJECT_NAME }}
