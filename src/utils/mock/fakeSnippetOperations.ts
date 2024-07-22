@@ -7,6 +7,7 @@ import {TestCase} from "../../types/TestCase.ts";
 import {TestCaseResult} from "../queries.tsx";
 import {FileType} from "../../types/FileType.ts";
 import {Rule} from "../../types/Rule.ts";
+import { BACKEND_URL } from '../constants.ts';
 
 const DELAY: number = 1000
 
@@ -30,6 +31,7 @@ export class FakeSnippetOperations implements SnippetOperations {
   }
 
   listSnippetDescriptors(page: number,pageSize: number): Promise<PaginatedSnippets> {
+    console.log(BACKEND_URL)
     const response: PaginatedSnippets = {
       page: page,
       page_size: pageSize,
@@ -79,13 +81,14 @@ export class FakeSnippetOperations implements SnippetOperations {
     })
   }
 
-  getTestCases(): Promise<TestCase[]> {
+  getTestCases(id: string): Promise<TestCase[]> {
+    console.log(id)
     return new Promise(resolve => {
       setTimeout(() => resolve(this.fakeStore.getTestCases()), DELAY)
     })
   }
 
-  postTestCase(_snippetId: string, testCase: Partial<TestCase>): Promise<TestCase> {
+  postTestCase(id:string, testCase: TestCase): Promise<TestCase> {
     return new Promise(resolve => {
       setTimeout(() => resolve(this.fakeStore.postTestCase(testCase)), DELAY)
     })

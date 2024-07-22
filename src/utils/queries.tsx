@@ -5,9 +5,10 @@ import {PaginatedUsers} from "./users.ts";
 import {TestCase} from "../types/TestCase.ts";
 import {FileType} from "../types/FileType.ts";
 import {Rule} from "../types/Rule.ts";
-import { OperationsWithAPI } from './operationsWithApi.ts';
+import SnippetService from '../services/snippet.service.ts';
 
-const snippetOperations: SnippetOperations = new OperationsWithAPI();
+//const snippetOperations: SnippetOperations = new FakeSnippetOperations(); // TODO: Replace with your implementation
+const snippetOperations: SnippetOperations = new SnippetService();
 
 export const useGetSnippets = (page: number = 0, pageSize: number = 10, snippetName?: string) => {
   return useQuery<PaginatedSnippets, Error>(['listSnippets', page,pageSize,snippetName], () => snippetOperations.listSnippetDescriptors(page, pageSize,snippetName));
@@ -45,14 +46,14 @@ export const useShareSnippet = () => {
 };
 
 
-export const useGetTestCases = (snippetId: string) => {
-  return useQuery<TestCase[] | undefined, Error>(['testCases'], () => snippetOperations.getTestCases(snippetId), {});
+export const useGetTestCases = (id: string) => {
+  return useQuery<TestCase[] | undefined, Error>(['testCases'], () => snippetOperations.getTestCases(id), {});
 };
 
 
-export const usePostTestCase = (snippetId: string) => {
+export const usePostTestCase = (id: string) => {
   return useMutation<TestCase, Error, Partial<TestCase>>(
-      (tc) => snippetOperations.postTestCase(snippetId, tc)
+      (tc) => snippetOperations.postTestCase(id, tc)
   );
 };
 

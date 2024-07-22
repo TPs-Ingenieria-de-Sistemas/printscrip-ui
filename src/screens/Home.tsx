@@ -7,11 +7,13 @@ import {Drawer} from "@mui/material";
 import {useGetSnippets} from "../utils/queries.tsx";
 import {usePaginationContext} from "../contexts/paginationContext.tsx";
 import useDebounce from "../hooks/useDebounce.ts";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const HomeScreen = () => {
   const {id: paramsId} = useParams<{ id: string }>();
   const [searchTerm, setSearchTerm] = useState('');
-  const [snippetName, setSnippetName] = useState('');
+  const {user: sippetName} = useAuth0();
+  const [snippetName, setSnippetName] = useState(sippetName?.sub);
   const [snippetId, setSnippetId] = useState<string | null>(null)
   const {page, page_size, count, handleChangeCount} = usePaginationContext()
   const {data, isLoading} = useGetSnippets(page, page_size, snippetName)

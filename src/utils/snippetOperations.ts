@@ -22,11 +22,11 @@ export interface SnippetOperations {
 
   getLintingRules(): Promise<Rule[]>
 
-  getTestCases(snippetId: string): Promise<TestCase[]>
+  getTestCases(id: string): Promise<TestCase[]>
 
   formatSnippet(snippet: string): Promise<string>
 
-  postTestCase(snippetId: string, testCase: Partial<TestCase>): Promise<TestCase>
+  postTestCase(id: string, testCase: Partial<TestCase>): Promise<TestCase>
 
   removeTestCase(id: string): Promise<string>
 
