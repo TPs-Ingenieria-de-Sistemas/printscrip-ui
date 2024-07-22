@@ -42,7 +42,7 @@ export class OperationsWithAPI implements SnippetOperations {
                     url: `${BACKEND_URL}/snippets/snippets/${id}`
                 })
                 resolve(response.data)
-            })
+            }, DELAY)
         })
     }
 
@@ -51,7 +51,18 @@ export class OperationsWithAPI implements SnippetOperations {
     }
 
     updateSnippetById(id: string, updateSnippet: UpdateSnippet): Promise<Snippet> {
-        return this.fake.updateSnippetById(id, updateSnippet)
+        //TODO: add TOKEN BEARER
+        return new Promise(resolve => {
+            setTimeout(async () => {
+                const response = await axios({
+                    method: 'PUT',
+                    url: `${BACKEND_URL}/snippets/snippets/${id}`,
+                    data: {content: updateSnippet.content}
+                })
+                resolve(response.data)
+            }, DELAY)
+
+        })
     }
 
     getUserFriends(name?: string, page?: number, pageSize?: number): Promise<PaginatedUsers> {
