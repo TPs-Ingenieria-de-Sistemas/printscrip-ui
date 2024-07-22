@@ -14,7 +14,7 @@ const BACK_URL = "https://dev-ingsis-group5.duckdns.org/snippets/"
 export class SnippetService implements SnippetOperations {
     private readonly fakeStore = new FakeSnippetStore()
 
-    listSnippetDescriptors(page: number, pageSize: number, sippetName?: string): Promise<PaginatedSnippets> {
+    listSnippetDescriptors(_page: number, _pageSize: number, sippetName?: string): Promise<PaginatedSnippets> {
         return axiosInstance.get(`${BACK_URL}snippets/by_user/${sippetName}`).then((res) => res.data);
     }
     createSnippet(createSnippet: CreateSnippet): Promise<Snippet> {

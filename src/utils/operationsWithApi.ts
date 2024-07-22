@@ -47,6 +47,7 @@ export class OperationsWithAPI implements SnippetOperations {
     }
 
     listSnippetDescriptors(page: number, pageSize: number, sippetName?: string): Promise<PaginatedSnippets> {
+         console.log(sippetName)
         return this.fake.listSnippetDescriptors(page, pageSize)
     }
 
@@ -152,6 +153,7 @@ export class OperationsWithAPI implements SnippetOperations {
 
     //??? WE ONLY GET TEST-ID and should be enought, but we ask for more in the API
     testSnippet(testCase: Partial<TestCase>): Promise<TestCaseResult> {
+        console.log(testCase)
         return this.fake.testSnippet()
     }
 
