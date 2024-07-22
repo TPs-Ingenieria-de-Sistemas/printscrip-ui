@@ -7,22 +7,37 @@ import { TestCaseResult } from "./queries";
 import { PaginatedSnippets, CreateSnippet, Snippet, UpdateSnippet } from "./snippet";
 import { SnippetOperations } from "./snippetOperations";
 import { PaginatedUsers } from "./users";
+import axios from "axios";
+import { BACKEND_URL } from "./constants";
 
+const DELAY: number = 1000
 
 export class OperationsWithAPI implements SnippetOperations {
     private readonly fake = new FakeSnippetOperations()
 
     constructor() {
         autoBind(this)
-      }
+    }
+
+    createSnippet(createSnippet: CreateSnippet): Promise<Snippet> {
+        //TODO: add TOKEN BEARER
+        return new Promise(resolve => {
+            setTimeout(async () => {
+                const response = await axios({
+                    method: 'POST',
+                    url: `${BACKEND_URL}/snippets/snippets`,
+                    data: {name: createSnippet.name, content: createSnippet.content, languages: createSnippet.language}
+                })
+                resolve(response.data)
+            }, DELAY)
+        })
+    }
 
     listSnippetDescriptors(page: number, pageSize: number, sippetName?: string): Promise<PaginatedSnippets> {
         return this.fake.listSnippetDescriptors(page, pageSize)
     }
 
-    createSnippet(createSnippet: CreateSnippet): Promise<Snippet> {
-        return this.fake.createSnippet(createSnippet)
-    }
+
 
     getSnippetById(id: string): Promise<Snippet | undefined> {
         return this.fake.getSnippetById(id)
