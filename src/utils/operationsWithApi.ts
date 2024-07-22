@@ -81,32 +81,61 @@ export class OperationsWithAPI implements SnippetOperations {
         return this.fake.getLintingRules()
     }
 
-    getTestCases(): Promise<TestCase[]> {
-        return this.fake.getTestCases()
-    }
-
     formatSnippet(snippet: string): Promise<string> {
         return this.fake.formatSnippet(snippet);
     }
 
-    postTestCase(testCase: Partial<TestCase>): Promise<TestCase> {
-        return this.fake.postTestCase(testCase);
+    getTestCases(snippetId: string): Promise<TestCase[]> {
+        //TODO: add TOKEN BEARER
+        return new Promise(resolve => {
+            setTimeout(async () => {
+                const response = await axios({
+                    method: 'GET',
+                    url: `${BACKEND_URL}/snippets/test-case/${snippetId}`
+                })
+                resolve(response.data)
+            }, DELAY)
+        })
+    }
+
+    postTestCase(snippetId: string, testCase: Partial<TestCase>): Promise<TestCase> {
+        //TODO: add TOKEN BEARER
+        return new Promise(resolve => {
+            setTimeout(async () => {
+                const response = await axios({
+                    method: 'POST',
+                    url: `${BACKEND_URL}/snippets/test-case/${snippetId}`,
+                    data: {...testCase, testCaseName: testCase.name}
+                })
+                resolve(response.data)
+            }, DELAY)
+        })
     }
 
     removeTestCase(id: string): Promise<string> {
-        return this.fake.removeTestCase(id)
+        //TODO: add TOKEN BEARER
+        return new Promise(resolve => {
+            setTimeout(async () => {
+                const response = await axios({
+                    method: 'DELETE',
+                    url: `${BACKEND_URL}/snippets/test-case/${id}`,
+                })
+                resolve(response.data)
+            }, DELAY)
+        })
     }
 
     deleteSnippet(id: string): Promise<string> {
         return this.fake.deleteSnippet(id);
     }
 
+    //??? WE ONLY GET TEST-ID and should be enought, but we ask for more in the API
     testSnippet(testCase: Partial<TestCase>): Promise<TestCaseResult> {
         return this.fake.testSnippet()
     }
 
     getFileTypes(): Promise<FileType[]> {
-        return this.fake.getFileTypes()
+        return Promise.resolve([{language: 'printscript', extension: 'ps'}])
     }
 
     modifyFormatRule(newRules: Rule[]): Promise<Rule[]> {
