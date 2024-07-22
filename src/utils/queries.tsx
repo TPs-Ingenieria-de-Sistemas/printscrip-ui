@@ -5,7 +5,6 @@ import {PaginatedUsers} from "./users.ts";
 import {TestCase} from "../types/TestCase.ts";
 import {FileType} from "../types/FileType.ts";
 import {Rule} from "../types/Rule.ts";
-import { FakeSnippetOperations } from './mock/fakeSnippetOperations.ts';
 import SnippetService from '../services/snippet.service.ts';
 
 //const snippetOperations: SnippetOperations = new FakeSnippetOperations(); // TODO: Replace with your implementation

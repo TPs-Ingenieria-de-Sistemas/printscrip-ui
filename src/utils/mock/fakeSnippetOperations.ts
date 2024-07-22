@@ -82,6 +82,7 @@ export class FakeSnippetOperations implements SnippetOperations {
   }
 
   getTestCases(id: string): Promise<TestCase[]> {
+    console.log(id)
     return new Promise(resolve => {
       setTimeout(() => resolve(this.fakeStore.getTestCases()), DELAY)
     })

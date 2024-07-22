@@ -6,7 +6,6 @@ import { PaginatedSnippets, CreateSnippet, Snippet, UpdateSnippet } from "../uti
 import { SnippetOperations } from "../utils/snippetOperations";
 import { PaginatedUsers } from "../utils/users";
 import axiosInstance from "./axios";
-import { BACKEND_URL } from "../utils/constants";
 import { FakeSnippetStore } from "../utils/mock/fakeSnippetStore";
 
 const DELAY: number = 1000
@@ -36,9 +35,14 @@ export class SnippetService implements SnippetOperations {
         return axiosInstance.put(`${BACK_URL}snippets/${id}`, updateSnippet).then((res) => res.data);
     }
     getUserFriends(name?: string, page?: number, pageSize?: number): Promise<PaginatedUsers> {
+        console.log(name)
+        console.log(page)
+        console.log(pageSize)
         throw new Error("Method not implemented.");
     }
     shareSnippet(snippetId: string, userId: string): Promise<Snippet> {
+        console.log(snippetId)
+        console.log(userId)
         throw new Error("Method not implemented.");
     }
     getFormatRules(): Promise<Rule[]> {
@@ -51,6 +55,7 @@ export class SnippetService implements SnippetOperations {
         return axiosInstance.get(`${BACK_URL}test-case/${id}`).then((res) => res.data);
     }
     formatSnippet(snippet: string): Promise<string> {
+        console.log(snippet)
         throw new Error("Method not implemented.");
     }
     postTestCase(id: string, testCase: Partial<TestCase>): Promise<TestCase> {
@@ -63,6 +68,7 @@ export class SnippetService implements SnippetOperations {
         return axiosInstance.delete(`${BACK_URL}snippets/${id}`).then((res) => res.data);
     }
     testSnippet(testCase: Partial<TestCase>): Promise<TestCaseResult> {
+        console.log(testCase)
         throw new Error("Method not implemented.");
     }
     getFileTypes(): Promise<FileType[]> {
