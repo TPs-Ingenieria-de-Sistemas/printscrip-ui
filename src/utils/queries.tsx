@@ -1,5 +1,5 @@
 import {useMutation, UseMutationResult, useQuery} from 'react-query';
-import {CreateSnippet, PaginatedSnippets, Snippet, UpdateSnippet} from './snippet.ts';
+import {CreateSnippet, Snippet, UpdateSnippet} from './snippet.ts';
 import {SnippetOperations} from "./snippetOperations.ts";
 import {PaginatedUsers} from "./users.ts";
 import {TestCase} from "../types/TestCase.ts";
@@ -10,8 +10,8 @@ import SnippetService from '../services/snippet.service.ts';
 //const snippetOperations: SnippetOperations = new FakeSnippetOperations(); // TODO: Replace with your implementation
 const snippetOperations: SnippetOperations = new SnippetService();
 
-export const useGetSnippets = (page: number = 0, pageSize: number = 10, snippetName?: string) => {
-  return useQuery<PaginatedSnippets, Error>(['listSnippets', page,pageSize,snippetName], () => snippetOperations.listSnippetDescriptors(page, pageSize,snippetName));
+export const useGetSnippets = (snippetName?: string) => {
+  return useQuery<Snippet[], Error>(['listSnippets', snippetName], () => snippetOperations.listSnippetDescriptors(snippetName));
 };
 
 export const useGetSnippetById = (id: string) => {

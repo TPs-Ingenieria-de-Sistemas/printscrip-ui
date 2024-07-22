@@ -1,4 +1,4 @@
-import {CreateSnippet, PaginatedSnippets, Snippet, UpdateSnippet} from './snippet'
+import {CreateSnippet, Snippet, UpdateSnippet} from './snippet'
 import {PaginatedUsers} from "./users.ts";
 import {TestCase} from "../types/TestCase.ts";
 import {TestCaseResult} from "./queries.tsx";
@@ -6,7 +6,7 @@ import {FileType} from "../types/FileType.ts";
 import {Rule} from "../types/Rule.ts";
 
 export interface SnippetOperations {
-  listSnippetDescriptors(page: number,pageSize: number,sippetName?: string): Promise<PaginatedSnippets>
+  listSnippetDescriptors(sippetName?: string): Promise<Snippet[]>
 
   createSnippet(createSnippet: CreateSnippet): Promise<Snippet>
 

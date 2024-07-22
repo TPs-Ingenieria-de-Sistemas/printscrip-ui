@@ -109,8 +109,6 @@ export const SnippetDetail = (props: SnippetDetailProps) => {
     shareSnippet({ snippetId: id, userId });
   }
 
-  console.log(id);
-
   return (
     <Box p={4} minWidth={"60vw"}>
       <Box width={"100%"} p={2} display={"flex"} justifyContent={"flex-end"}>

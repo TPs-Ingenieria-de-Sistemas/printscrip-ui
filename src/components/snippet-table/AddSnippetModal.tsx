@@ -22,7 +22,6 @@ import {CreateSnippet, CreateSnippetWithLang} from "../../utils/snippet.ts";
 import {ModalWrapper} from "../common/ModalWrapper.tsx";
 import {useCreateSnippet, useGetFileTypes} from "../../utils/queries.tsx";
 import {queryClient} from "../../App.tsx";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export const AddSnippetModal = ({open, onClose, defaultSnippet}: {
     open: boolean,
@@ -36,11 +35,9 @@ export const AddSnippetModal = ({open, onClose, defaultSnippet}: {
         onSuccess: () => queryClient.invalidateQueries('listSnippets')
     })
     const {data: fileTypes} = useGetFileTypes();
-    const {user} = useAuth0();
 
     const handleCreateSnippet = async () => {
         const newSnippet: CreateSnippet = {
-            userId: user?.sub ?? '',
             name: snippetName,
             content: code,
             language: language,
