@@ -33,14 +33,21 @@ export class OperationsWithAPI implements SnippetOperations {
         })
     }
 
-    listSnippetDescriptors(page: number, pageSize: number, sippetName?: string): Promise<PaginatedSnippets> {
-        return this.fake.listSnippetDescriptors(page, pageSize)
+    getSnippetById(id: string): Promise<Snippet | undefined> {
+        //TODO: add TOKEN BEARER
+        return new Promise(resolve => {
+            setTimeout(async () => {
+                const response = await axios({
+                    method: 'GET',
+                    url: `${BACKEND_URL}/snippets/snippets/${id}`
+                })
+                resolve(response.data)
+            })
+        })
     }
 
-
-
-    getSnippetById(id: string): Promise<Snippet | undefined> {
-        return this.fake.getSnippetById(id)
+    listSnippetDescriptors(page: number, pageSize: number, sippetName?: string): Promise<PaginatedSnippets> {
+        return this.fake.listSnippetDescriptors(page, pageSize)
     }
 
     updateSnippetById(id: string, updateSnippet: UpdateSnippet): Promise<Snippet> {
