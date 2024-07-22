@@ -22,6 +22,17 @@ export const queryClient = new QueryClient()
 const App = () => {
     const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
+   const handleToken = () => {
+     const userInfo = localStorage.getItem(
+       Object.keys(localStorage).find((key) => key.includes("user")) ?? ""
+     );
+     if (userInfo) {
+       localStorage.setItem("token", JSON.parse(userInfo).id_token);
+    }
+  };
+
+  handleToken();
+
   if (isLoading) {
     return <div>Loading ...</div>;
   }

@@ -2,12 +2,14 @@ import {useMutation, UseMutationResult, useQuery} from 'react-query';
 import {CreateSnippet, PaginatedSnippets, Snippet, UpdateSnippet} from './snippet.ts';
 import {SnippetOperations} from "./snippetOperations.ts";
 import {PaginatedUsers} from "./users.ts";
-import {FakeSnippetOperations} from "./mock/fakeSnippetOperations.ts";
 import {TestCase} from "../types/TestCase.ts";
 import {FileType} from "../types/FileType.ts";
 import {Rule} from "../types/Rule.ts";
+import { FakeSnippetOperations } from './mock/fakeSnippetOperations.ts';
+import SnippetService from '../services/snippet.service.ts';
 
-const snippetOperations: SnippetOperations = new FakeSnippetOperations(); // TODO: Replace with your implementation
+//const snippetOperations: SnippetOperations = new FakeSnippetOperations(); // TODO: Replace with your implementation
+const snippetOperations: SnippetOperations = new SnippetService();
 
 export const useGetSnippets = (page: number = 0, pageSize: number = 10, snippetName?: string) => {
   return useQuery<PaginatedSnippets, Error>(['listSnippets', page,pageSize,snippetName], () => snippetOperations.listSnippetDescriptors(page, pageSize,snippetName));
@@ -45,14 +47,14 @@ export const useShareSnippet = () => {
 };
 
 
-export const useGetTestCases = () => {
-  return useQuery<TestCase[] | undefined, Error>(['testCases'], () => snippetOperations.getTestCases(), {});
+export const useGetTestCases = (id: string) => {
+  return useQuery<TestCase[] | undefined, Error>(['testCases'], () => snippetOperations.getTestCases(id), {});
 };
 
 
-export const usePostTestCase = () => {
+export const usePostTestCase = (id: string) => {
   return useMutation<TestCase, Error, Partial<TestCase>>(
-      (tc) => snippetOperations.postTestCase(tc)
+      (tc) => snippetOperations.postTestCase(id, tc)
   );
 };
 
